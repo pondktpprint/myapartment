@@ -13,12 +13,12 @@ RUN npm run build
 
 FROM node:22-bookworm-slim AS runner
 WORKDIR /app
-ENV NODE_ENV=production NEXT_TELEMETRY_DISABLED=1 PORT=3000 DATA_DIR=/app/data
+ENV NODE_ENV=production NEXT_TELEMETRY_DISABLED=1 PORT=3001 DATA_DIR=/app/data
 RUN useradd --system --uid 1001 nextjs && mkdir -p /app/data && chown -R nextjs:nextjs /app
 COPY --from=builder --chown=nextjs:nextjs /app/package.json /app/package-lock.json ./
 COPY --from=builder --chown=nextjs:nextjs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nextjs /app/.next/static ./.next/static
 COPY --from=builder --chown=nextjs:nextjs /app/public ./public
 USER nextjs
-EXPOSE 3000
+EXPOSE 3001
 CMD ["node","server.js"]

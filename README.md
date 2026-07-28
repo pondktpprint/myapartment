@@ -12,7 +12,7 @@ npm ci
 npm run dev
 ```
 
-เปิด `http://localhost:3000`
+เปิด `http://localhost:3001`
 
 ## Deploy บน VPS ด้วย Docker
 
@@ -29,7 +29,7 @@ docker compose logs -f app
 
 ตั้ง `ADMIN_USERNAME` และ `ADMIN_PASSWORD` ใน `.env` ก่อนเริ่มระบบ โดยใช้รหัสผ่านยาวและไม่ซ้ำกับบริการอื่น
 
-แอปฟังเฉพาะ `127.0.0.1:3000` ควรวาง Nginx หรือ Caddy ด้านหน้าเพื่อเปิด HTTPS
+แอปฟังเฉพาะ `127.0.0.1:3001` ควรวาง Nginx หรือ Caddy ด้านหน้าเพื่อเปิด HTTPS
 
 ตัวอย่าง Nginx:
 
@@ -39,7 +39,7 @@ server {
     server_name rent.example.com;
 
     location / {
-        proxy_pass http://127.0.0.1:3000;
+        proxy_pass http://127.0.0.1:3001;
         proxy_set_header Host $host;
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
